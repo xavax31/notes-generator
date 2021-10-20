@@ -91,6 +91,11 @@ define(["require", "exports"], function (require, exports) {
                 random: false,
             },
         },
+        {
+            id: "custom",
+            desc: "Customisé",
+            type: "section",
+        },
     ];
 });
 //# sourceMappingURL=presets.js.map

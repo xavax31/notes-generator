@@ -165,7 +165,7 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
                 value: 3,
             });
             var optionsPresets = presets_1.presets.map(function (value) {
-                return { id: value.id, desc: value.desc };
+                return { id: value.id, desc: value.desc, type: value.type };
             });
             this.addComboBox({
                 id: "preset",
@@ -177,7 +177,7 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
                     var presetChoosen = presets_1.presets.filter(function (value) { return evt.target.value === value.id; });
                     console.log(presetChoosen);
                     _this.setConfig(presetChoosen[0].params);
-                    _this._refresh();
+                    _this._refresh(true);
                 },
             });
             // this.addNumberItem({id: "easing", description: "elasticité", min: 0, step: 0.1, value: 0.1});
@@ -282,7 +282,10 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
             this[id].view.css("position", "relative");
             this[id].colorIndex = colorIndex;
         };
-        UserMenu.prototype._refresh = function () {
+        UserMenu.prototype._refresh = function (dueToPresetChange) {
+            if (dueToPresetChange === void 0) { dueToPresetChange = false; }
+            if (!dueToPresetChange)
+                this["preset"].value = "custom";
             this.onchange.dispatch({ target: this });
         };
         UserMenu.prototype.getConfig = function () {

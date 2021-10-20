@@ -183,7 +183,7 @@ export default class UserMenu extends SimpleDOMView {
 		});
 
 		let optionsPresets = presets.map((value) => {
-			return { id: value.id, desc: value.desc };
+			return { id: value.id, desc: value.desc, type: value.type };
 		});
 
 		this.addComboBox({
@@ -201,7 +201,7 @@ export default class UserMenu extends SimpleDOMView {
 
 				this.setConfig(presetChoosen[0].params);
 
-				this._refresh();
+				this._refresh(true);
 			},
 		});
 		// this.addNumberItem({id: "easing", description: "elasticité", min: 0, step: 0.1, value: 0.1});
@@ -341,7 +341,8 @@ export default class UserMenu extends SimpleDOMView {
 		this[id].colorIndex = colorIndex;
 	}
 
-	_refresh() {
+	_refresh(dueToPresetChange = false) {
+		if (!dueToPresetChange) this["preset"].value = "custom";
 		this.onchange.dispatch({ target: this });
 	}
 

@@ -87,4 +87,9 @@ export const presets = [
 			random: false,
 		},
 	},
+	{
+		id: "custom",
+		desc: "Customisé",
+		type: "section",
+	},
 ];
