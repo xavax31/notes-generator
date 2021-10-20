@@ -1,0 +1,289 @@
+{
+    "formatJSON": "SimpleJSON2",
+    "projectData": [
+        {
+            "id": "Informations",
+            "type": "DataObject",
+            "children": [
+                {
+                    "id": "project",
+                    "type": "ProjectInformation",
+                    "description": "Configuration globale du projet",
+                    "value": {
+                        "permanentLock": false,
+                        "id": "notes-generator",
+                        "title": "",
+                        "type": "ApplicationBabelHTML5",
+                        "description": "Modèle jx avec Screens Manager",
+                        "version": "1.0",
+                        "appCodeVersion": "intern: src v1.0",
+                        "gitRepository": "",
+                        "previewIndex": "",
+                        "status": "new",
+                        "dateValidation": "",
+                        "dateGabarit": "",
+                        "devNumDaysCode": 0,
+                        "dateBeta": "",
+                        "devNumDaysDebug": 0,
+                        "dateRelease": "",
+                        "datePublication": "",
+                        "devNumDaysCleanup": 0,
+                        "publication": "all",
+                        "assignedUsers": "all",
+                        "Langues": "fr",
+                        "Doc": "<a href='url.com' target='_blank' >Doc Moteur</a> ",
+                        "BugReport": "<a href='url.com' target='_blank' >Bug Report link</a>",
+                        "configPath": "/projects/milan-presse/notes-generator/etc/editor/editor.json"
+                    }
+                },
+                {
+                    "id": "engine",
+                    "type": "JXEngineInformation",
+                    "description": "Configuration liée à la technologie utilisée (cf project.type)",
+                    "value": {
+                        "type": "jx-engine",
+                        "jxVersion": "intern: src/jx v0.9",
+                        "jxMinify": "auto",
+                        "modulePath": ".",
+                        "mainCtrl": "index",
+                        "srcPath": "js/src",
+                        "defaultViewType": "CJS",
+                        "screenRatio": "auto",
+                        "framerate": 24,
+                        "backgroundColor": "#ffffff",
+                        "startButton": "no",
+                        "startButtonHeightPercent": 40
+                    }
+                }
+            ]
+        },
+        {
+            "id": "Resources",
+            "type": "Group",
+            "visible": "admin,dev",
+            "children": []
+        },
+        {
+            "id": "Scenario",
+            "type": "Group",
+            "children": [
+                {
+                    "id": "PrincipeGeneral",
+                    "type": "FileItem",
+                    "description": "Scenario general commun à tous les projets de la série TER",
+                    "asset": {
+                        "type": "PDF",
+                        "src": "docs/PRINCIPE_GENERAL.pdf"
+                    },
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "id": "ScenarioFile",
+                    "type": "FileItem",
+                    "description": "scenario",
+                    "asset": {
+                        "type": "PDF",
+                        "src": "docs/SCENARIO.pdf"
+                    },
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "id": "Commentaires",
+                    "type": "Text",
+                    "editable": true,
+                    "description": "Décrire ici les modifications souhaitées par rapport au modèle actuel.",
+                    "value": "",
+                    "visible": true,
+                    "timestamp": 1501068167638
+                }
+            ]
+        },
+        {
+            "id": "Configuration",
+            "type": "DataObject",
+            "description": "Contient les paramêtres propre à cette application.",
+            "children": []
+        },
+        {
+            "id": "COMMUN",
+            "type": "Group",
+            "children": [
+                {
+                    "id": "MUSIC",
+                    "type": "Sound",
+                    "description": "Musique de fond",
+                    "asset": {
+                        "src": "sounds/MUSIC.mp3"
+                    }
+                },
+                {
+                    "id": "SPLASHSCREEN",
+                    "type": "Image",
+                    "description": "Image de chargement",
+                    "asset": {
+                        "src": "images/SPLASHSCREEN.jpg"
+                    }
+                },
+                {
+                    "id": "START_BUTTON",
+                    "type": "Image",
+                    "description": "Bouton pour lancer le jeu (actuellement uniquement actif et nécessaire sur ipad)",
+                    "asset": {
+                        "src": "images/START_BUTTON.png"
+                    }
+                },
+                {
+                    "id": "COMMON_FLASH_LIBRARY",
+                    "type": "DataGroup",
+                    "children": [
+                        {
+                            "id": "SCREEN",
+                            "type": "Flashtml",
+                            "asset": {
+                                "preload": false,
+                                "src": "COMMON_FLASH_LIBRARY",
+                                "type": "Flashtml",
+                                "compType": "Flashtml"
+                            }
+                        },
+                        {
+                            "id": "CONFIG",
+                            "type": "FlashtmlPack",
+                            "value": {
+                                "resourceID": "COMMON_FLASH_LIBRARY.SCREEN",
+                                "framerate": 24,
+                                "optimised": false
+                            },
+                            "preview": false,
+                            "visible": false
+                        }
+                    ]
+                },
+                {
+                    "id": "CREDITS_APP",
+                    "type": "DataGroup",
+                    "children": [
+                        {
+                            "id": "CONFIG",
+                            "type": "Rectangle",
+                            "description": "position et dimensions du bouton crédits (en px), par rapport à un écran de 1280 x 720px",
+                            "editable": true,
+                            "value": {
+                                "x": 1164,
+                                "y": 675,
+                                "width": 60,
+                                "height": 60
+                            }
+                        },
+                        {
+                            "id": "",
+                            "type": "Separator",
+                            "description": ""
+                        },
+                        {
+                            "id": "BUTTON",
+                            "type": "Image",
+                            "description": "Bouton pour afficher les crédits",
+                            "asset": {
+                                "src": "images/CREDITS_BUTTON.png"
+                            }
+                        },
+                        {
+                            "id": "IMAGE",
+                            "type": "Image",
+                            "description": "Image des crédits",
+                            "asset": {
+                                "src": "images/CREDITS.jpg"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "BT_REPLAY_APP",
+                    "type": "DataGroup",
+                    "children": [
+                        {
+                            "id": "CONFIG",
+                            "type": "Rectangle",
+                            "description": "position et dimensions du bouton crédits (en px), par rapport à un écran de 1280 x 720px",
+                            "editable": true,
+                            "value": {
+                                "x": 1220,
+                                "y": 60,
+                                "width": 100,
+                                "height": 100
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "Bruitages",
+                    "type": "Separator"
+                }
+            ]
+        },
+        {
+            "id": "INTRO",
+            "type": "DataGroup",
+            "children": [
+                {
+                    "id": "VIDEO",
+                    "type": "Video",
+                    "description": "",
+                    "asset": {
+                        "preload": false,
+                        "src": "INTRO/INTRO.mp4"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "SCREEN_00",
+            "type": "DataGroup",
+            "children": [
+                {
+                    "id": "FLASHSCREEN",
+                    "type": "DataGroup",
+                    "children": [
+                        {
+                            "id": "SCREEN",
+                            "type": "Flashtml",
+                            "asset": {
+                                "preload": false,
+                                "src": "SCREEN_00/SCREEN_00",
+                                "type": "Flashtml",
+                                "compType": "Flashtml"
+                            }
+                        },
+                        {
+                            "id": "CONFIG",
+                            "type": "FlashtmlPack",
+                            "value": {
+                                "resourceID": "SCREEN_00.FLASHSCREEN.SCREEN",
+                                "framerate": 24,
+                                "optimised": false
+                            },
+                            "preview": false,
+                            "visible": false
+                        }
+                    ]
+                },
+                {
+                    "id": "Bruitages",
+                    "type": "Separator",
+                    "description": ""
+                },
+                {
+                    "id": "B_SAMPLE",
+                    "type": "Sound",
+                    "description": "",
+                    "asset": {
+                        "src": "sounds/B_SAMPLE.mp3"
+                    }
+                }
+            ]
+        }
+    ]
+}

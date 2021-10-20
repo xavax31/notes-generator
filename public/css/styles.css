@@ -1,0 +1,166 @@
+
+body{
+  width:100%;
+  height:100%;
+  margin:0;
+    overflow:hidden;
+ 
+}
+
+
+
+.busyScreen {
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    margin: auto;
+    color: #fff;
+   top: 0;
+    left: 0;
+    bottom :0;
+    right: 0;
+    background: #000;
+    opacity: 0;
+    z-index: 850;
+  
+    font-family: Helvetica, Arial, Sans-Serif;
+}
+
+.canvasHolder {
+    position: absolute;
+    box-sizing: border-box;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom :0;
+    right: 0;
+ /*   width:100%;
+    height:100%;
+*/    z-index:-1;
+   /* border: 2px solid blue;
+background-color: blue;*/
+}
+
+
+#canvas{
+    box-sizing: border-box;
+    position: absolute;
+    /*-webkit-transform-origin: 50%;*/
+
+/*    margin: auto;
+     top: 0;
+    left: 0;
+    bottom :0;
+    right: 0;
+*//*    width:800px;
+    height:600px;
+*/    /*border: 1px solid green;*/
+    background-color: transparent;
+    z-index: 1;
+    -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+
+
+#messageStart {
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    margin: auto;
+   top: 0;
+    left: 0;
+    bottom :0;
+    right: 0;
+    /*background: #fff;
+    opacity: 0.6;*/
+    z-index: 900;
+ /*-webkit-transform: translate3d(0,0,1px);
+ transform: translate3d(0,0,1px);*/
+    text-align: center;
+    vertical-align: middle;
+    
+    
+}
+
+#splashscreen {
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    margin: auto;
+   top: 0;
+    left: 0;
+    bottom :0;
+    right: 0;
+    /*background: #fff;
+    opacity: 0.6;*/
+    z-index: 900;
+ /*-webkit-transform: translate3d(0,0,1px);
+ transform: translate3d(0,0,1px);*/
+    text-align: center;
+    vertical-align: middle;
+    
+    
+}
+
+#splashscreen img {
+    position:absolute;
+    margin: auto;
+   top: 0;
+    left: 0;
+    bottom :0;
+    right: 0;
+    /*background: #fff;
+    opacity: 0.6;*/
+    z-index: 900;
+ /*-webkit-transform: translate3d(0,0,1px);
+ transform: translate3d(0,0,1px);*/
+    text-align: center;
+    vertical-align: middle;
+    
+    
+}
+
+/* use by splashscreen */
+.center-content {
+    position: relative;    
+}
+
+.imgScreen {
+    max-width: 100%;
+    max-height: 100%;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+
+
+
+/*use by messageStart image*/
+.absolute-center {
+     margin: auto;
+    top: 0;
+     left: 0;
+     bottom :0;
+     right: 0;
+      color: #000;
+font-weight: bold;  
+    font-size: 60px; 
+    width: 100%;
+    
+    height:250px; 
+    padding-top: 10px;
+    padding-bottom: 10px;
+ position:absolute;
+  vertical-align: middle;
+  /*background: #ddd;*/
+  opacity: 0.9;
+  font-family: Helvetica, Arial, Sans-Serif;
+  /*line-height: 65px;*/ /* <-- adjust this */
+
+}
+
+

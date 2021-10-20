@@ -1,0 +1,1701 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "import ModuleType from \"jx/core/presets/StageGameModule\";\nimport Screen00 from \"src/screens/Screen00\"\n\nexport default class MainCtrl extends ModuleType {\n\tconstructor(dataObject){\n\t\tsuper(Object.assign({\n\t\t\tstageWidth: 1280,\n\t\t\tratio: 16/9,\n\t\t\tscreen: \"intro\",\n\t\t\thelper: false, \n\t\t\tblockMobileScroll: false, \n\t\t\tblockMobileContextualMenu: false, \n\t\t\tdelayAfterClick: false, \n\t\t\tflashQuality: \"good\",\n\t\t\tcommonFlaLib: false\n\t\t}, dataObject));\n\t}\n\n\n\t_onBeforeLoad(callback) {\n\t\tcallback();\n\t}\n\n\n\t/*******************************************************************************\n\t* INIT\n\t*/\n\tinit(onInitialised){\n\n\t\tthis._configure(this.dataObject);\n\n\t\tthis.ccid({id: \"screens\", type: \"ScreensManager\", stage: this.stage, defaultTransition: \"FadeBlackInOut\"});\n\n\t\tthis.screens.add({id: \"intro\", type: \"ScreenVideo\", rid: \"INTRO\", bgMusicVolPC: 0, stage: this.stage, \n\t\t\tonfinished: evt=>{\n\t\t\t\tthis.jx.dj.music.play({id:\"MUSIC\"});\n\t\t\t\tthis.screens.go(\"screen00\");\n\t\t\t}\n\t\t});\n\n\t\tthis.screens.add({id: \"screen00\", type: Screen00, stage: this.stage, \n\t\t\tonfinished: evt=>{\n\t\t\t}\n\t\t});\n\n\t\tthis.comps.initChildren(onInitialised);\n\t}\n\n\t/*******************************************************************************\n\t* START\n\t*/\n\tstart(){\n\n\t\tthis.screens.go(this.firstScreen);\n\t\t// this.jx.dj.music.play({id:\"MUSIC\"});\n\t}\n\n\n\t_configure({\n\t\t\thelper=false, \n\t\t\tblockMobileScroll=false, \n\t\t\tblockMobileContextualMenu=false, \n\t\t\tdelayAfterClick=false, \n\t\t\tflashQuality=\"good\",\n\t\t\tcommonFlaLib=false,\n\t\t\tscreen=\"intro\"\n\t\t}) {\n\n\t\tif (helper) this.jx.helper = this.cc({type: Helper, stage: this.stage});\n\n\t\tif (blockMobileContextualMenu) $(\"body\").css(\"-webkit-touch-callout\", \"none\");\n\n\t\tif (blockMobileScroll) {\n\t\t\tdocument.ontouchmove = function (e) {\n\t\t\t  e.preventDefault();\n\t\t\t}\n\t\t}\n\n\t\tif (delayAfterClick) this.jx.config.app.lockDelayAfterClick = 250;\n\n\t\tthis.jx.config.flashOptimizer.quality = flashQuality;\n\n\t\tthis.stage.ratio = this.dataObject.ratio;\n\n\t\tif (commonFlaLib) this.commonLib = this.jx.db.findOne({id: \"COMMON_LIB.SCREEN\"}).data;\n\n\t\tthis._getFirstScreenAndPhase({firstScreen: screen});\n\t}\n\n\n\t/**\n\t * get the first screen and phase\n\t */\n\t_getFirstScreenAndPhase({firstScreen}) {\n\t\tlet screenShortcut = (this.jx.config.urlParams.screen || firstScreen).split(\".\"); // priority to screen passed as argument in url (&screen=\"screenID\");\n\t\tthis.firstScreen = screenShortcut[0];\n\t\tthis.firstPhase = screenShortcut.length > 1 ? screenShortcut[1] : null;\n\t}\n\n\n}\n",
+    "static": true,
+    "longname": "src/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 1,
+    "kind": "class",
+    "name": "MainCtrl",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~MainCtrl",
+    "access": null,
+    "export": true,
+    "importPath": "./src/index.js",
+    "importStyle": "MainCtrl",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "jx/core/presets/StageGameModule~ModuleType"
+    ]
+  },
+  {
+    "__docId__": 2,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/index.js~MainCtrl",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~MainCtrl#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dataObject",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 3,
+    "kind": "method",
+    "name": "_onBeforeLoad",
+    "memberof": "src/index.js~MainCtrl",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~MainCtrl#_onBeforeLoad",
+    "access": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "callback",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 4,
+    "kind": "method",
+    "name": "init",
+    "memberof": "src/index.js~MainCtrl",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~MainCtrl#init",
+    "access": null,
+    "description": "****************************************************************************\nINIT",
+    "lineNumber": 28,
+    "params": [
+      {
+        "name": "onInitialised",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 5,
+    "kind": "method",
+    "name": "start",
+    "memberof": "src/index.js~MainCtrl",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~MainCtrl#start",
+    "access": null,
+    "description": "****************************************************************************\nSTART",
+    "lineNumber": 52,
+    "params": []
+  },
+  {
+    "__docId__": 6,
+    "kind": "method",
+    "name": "_configure",
+    "memberof": "src/index.js~MainCtrl",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~MainCtrl#_configure",
+    "access": null,
+    "description": null,
+    "lineNumber": 59,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"helper\": *, \"blockMobileScroll\": *, \"blockMobileContextualMenu\": *, \"delayAfterClick\": *, \"flashQuality\": *, \"commonFlaLib\": *, \"screen\": *}"
+        ],
+        "defaultRaw": {
+          "helper": null,
+          "blockMobileScroll": null,
+          "blockMobileContextualMenu": null,
+          "delayAfterClick": null,
+          "flashQuality": null,
+          "commonFlaLib": null,
+          "screen": null
+        },
+        "defaultValue": "{\"helper\":null,\"blockMobileScroll\":null,\"blockMobileContextualMenu\":null,\"delayAfterClick\":null,\"flashQuality\":null,\"commonFlaLib\":null,\"screen\":null}"
+      }
+    ]
+  },
+  {
+    "__docId__": 7,
+    "kind": "member",
+    "name": "commonLib",
+    "memberof": "src/index.js~MainCtrl",
+    "static": false,
+    "longname": "src/index.js~MainCtrl#commonLib",
+    "access": null,
+    "description": null,
+    "lineNumber": 85,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 8,
+    "kind": "method",
+    "name": "_getFirstScreenAndPhase",
+    "memberof": "src/index.js~MainCtrl",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~MainCtrl#_getFirstScreenAndPhase",
+    "access": null,
+    "description": "get the first screen and phase",
+    "lineNumber": 94,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"firstScreen\": *}"
+        ],
+        "defaultRaw": {
+          "firstScreen": null
+        },
+        "defaultValue": "{\"firstScreen\":null}"
+      }
+    ]
+  },
+  {
+    "__docId__": 9,
+    "kind": "member",
+    "name": "firstScreen",
+    "memberof": "src/index.js~MainCtrl",
+    "static": false,
+    "longname": "src/index.js~MainCtrl#firstScreen",
+    "access": null,
+    "description": null,
+    "lineNumber": 96,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 10,
+    "kind": "member",
+    "name": "firstPhase",
+    "memberof": "src/index.js~MainCtrl",
+    "static": false,
+    "longname": "src/index.js~MainCtrl#firstPhase",
+    "access": null,
+    "description": null,
+    "lineNumber": 97,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 11,
+    "kind": "file",
+    "name": "src/screens/Screen00.js",
+    "content": "import ScreenFlashBase from \"src/screens/ScreenFlashBase\"\n\n/**\n */\nexport default class Screen00 extends ScreenFlashBase{\n\n\tconstructor(dataObject) {\n\t\tsuper(Object.assign({screenName: \"SCREEN_00\"}, dataObject));\n\t}\n\n\n\tinit(callback) {\n\t\tsuper.init(()=>{\n\t\t\tcallback();\n\t\t});\n\t}\n\n\n\t_initScreen() {\n\t\tsuper._initScreen();\n\t}\n\n\n\tshow(callback, data) {\n\t\tsuper.show(()=>{\n\t\t\tcallback({target: this});\n\t\t}, data);\n\t}\n\n\n\tkill() {\n\t\tif (this._killed) return;\n\t\tsuper.kill();\n\t}\n\n}\n\n\n",
+    "static": true,
+    "longname": "src/screens/Screen00.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 12,
+    "kind": "class",
+    "name": "Screen00",
+    "memberof": "src/screens/Screen00.js",
+    "static": true,
+    "longname": "src/screens/Screen00.js~Screen00",
+    "access": null,
+    "export": true,
+    "importPath": "./src/screens/Screen00.js",
+    "importStyle": "Screen00",
+    "description": "",
+    "lineNumber": 5,
+    "interface": false,
+    "extends": [
+      "src/screens/ScreenFlashBase~ScreenFlashBase"
+    ]
+  },
+  {
+    "__docId__": 13,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/screens/Screen00.js~Screen00",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/Screen00.js~Screen00#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dataObject",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 14,
+    "kind": "method",
+    "name": "init",
+    "memberof": "src/screens/Screen00.js~Screen00",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/Screen00.js~Screen00#init",
+    "access": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "callback",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 15,
+    "kind": "method",
+    "name": "_initScreen",
+    "memberof": "src/screens/Screen00.js~Screen00",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/Screen00.js~Screen00#_initScreen",
+    "access": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 16,
+    "kind": "method",
+    "name": "show",
+    "memberof": "src/screens/Screen00.js~Screen00",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/Screen00.js~Screen00#show",
+    "access": null,
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "callback",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 17,
+    "kind": "method",
+    "name": "kill",
+    "memberof": "src/screens/Screen00.js~Screen00",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/Screen00.js~Screen00#kill",
+    "access": null,
+    "description": null,
+    "lineNumber": 31,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 18,
+    "kind": "file",
+    "name": "src/screens/ScreenBase.js",
+    "content": "import Component from \"jx/core/comps/Component\"\n\n\n/**\n* **Events:**\n* - onfinished : fired when screen is completed.\n */\nexport default class ScreenBase extends Component{\n\n\tconstructor(dataObject) {\n\t\tsuper(Object.assign({\n\t\t\tstage: null,\n\t\t\tscreenManager: null,\n\t\t\tscreenName: null\n\t\t}, dataObject));\n\n\n\t\t/** @type {StageView} */\n\t\tthis.stage = this.dataObject.stage || this.jx.app.stage;\n\t\t/** @type {ScreenManager} */\n\t\tthis.screenManager = this.dataObject.screenManager || this.jx.app.screens;\n\t\t/** @type {String} */\n\t\tthis._screenName = this.dataObject.screenName;\n\n\t\tthis.notInit = true;\n\n\t\tthis.addEventDispatcher(\"onfinished\");\n\t\tif (this.dataObject.onfinished) this.onfinished.add(this.dataObject.onfinished);\n\n\t\tthis._config = {\n\t\t};\n\n\t\t//-- get screen config in json\n\t\tlet jsonConfig = this.jx.db.getParameter(this._screenName + \".Configuration\");\n\t\tif (jsonConfig)  Object.assign(this._config, jsonConfig);\n\n\t\tthis._declareProperties();\n\t}\n\n\n\t_declareProperties() {\n\t}\n\n\n\tkill() {\n\t\tif (this._killed) return;\n\n\t\tif (this.screen) {\n\t\t\tthis.hide();\n\t\t\tthis.screen = null;\n\t\t};\n\n\t\tthis.onfinished.removeAll();\n\t\tthis.stage = null;\n\t\tthis.onfinished = null;\n\t\tthis.screenManager = null;\n\t\tsuper.kill();\n\t}\n\n\n\t/**\n\t * init (async) screen (clipcjs)\n\t * @param  {Function} callback \n\t */\n\tinit(callback) { \n\t\tthis.comps.initChildren( ()=>{\n\t\t\t\tthis._initScreen(); \n\t\t\t\tcallback();\n\t\t});\n\t}\n\n\n\t/**\n\t * initScreen after this._lib (ClipCJS) is ready.\n\t */\n\t_initScreen() {\n\n\t}\n\n\n\t/**\n\t * show screen\n\t * @param  {Function} callback fired when screen is really displayed.\n\t * @param  {any}   data     data to transmit to screen\n\t */\n\tshow(callback, data) {\n\t\tcallback({target: this});\n\t}\n\n\n\t/**\n\t * hide screen\n\t */\n\thide() {\n\t}\n\n}\n\n\n\n",
+    "static": true,
+    "longname": "src/screens/ScreenBase.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 19,
+    "kind": "class",
+    "name": "ScreenBase",
+    "memberof": "src/screens/ScreenBase.js",
+    "static": true,
+    "longname": "src/screens/ScreenBase.js~ScreenBase",
+    "access": null,
+    "export": true,
+    "importPath": "./src/screens/ScreenBase.js",
+    "importStyle": "ScreenBase",
+    "description": "**Events:**\n- onfinished : fired when screen is completed.",
+    "lineNumber": 8,
+    "interface": false,
+    "extends": [
+      "jx/core/comps/Component~Component"
+    ]
+  },
+  {
+    "__docId__": 20,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dataObject",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 21,
+    "kind": "member",
+    "name": "stage",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#stage",
+    "access": null,
+    "description": null,
+    "lineNumber": 19,
+    "type": {
+      "nullable": null,
+      "types": [
+        "StageView"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 22,
+    "kind": "member",
+    "name": "screenManager",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#screenManager",
+    "access": null,
+    "description": null,
+    "lineNumber": 21,
+    "type": {
+      "nullable": null,
+      "types": [
+        "ScreenManager"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 23,
+    "kind": "member",
+    "name": "_screenName",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#_screenName",
+    "access": null,
+    "description": null,
+    "lineNumber": 23,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 24,
+    "kind": "member",
+    "name": "notInit",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#notInit",
+    "access": null,
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 25,
+    "kind": "member",
+    "name": "_config",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#_config",
+    "access": null,
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 26,
+    "kind": "method",
+    "name": "_declareProperties",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#_declareProperties",
+    "access": null,
+    "description": null,
+    "lineNumber": 41,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 27,
+    "kind": "method",
+    "name": "kill",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#kill",
+    "access": null,
+    "description": null,
+    "lineNumber": 45,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 28,
+    "kind": "member",
+    "name": "screen",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#screen",
+    "access": null,
+    "description": null,
+    "lineNumber": 50,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 29,
+    "kind": "member",
+    "name": "stage",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#stage",
+    "access": null,
+    "description": null,
+    "lineNumber": 54,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 30,
+    "kind": "member",
+    "name": "onfinished",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#onfinished",
+    "access": null,
+    "description": null,
+    "lineNumber": 55,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 31,
+    "kind": "member",
+    "name": "screenManager",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#screenManager",
+    "access": null,
+    "description": null,
+    "lineNumber": 56,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 32,
+    "kind": "method",
+    "name": "init",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#init",
+    "access": null,
+    "description": "init (async) screen (clipcjs)",
+    "lineNumber": 65,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "callback",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 33,
+    "kind": "method",
+    "name": "_initScreen",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#_initScreen",
+    "access": null,
+    "description": "initScreen after this._lib (ClipCJS) is ready.",
+    "lineNumber": 76,
+    "params": []
+  },
+  {
+    "__docId__": 34,
+    "kind": "method",
+    "name": "show",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#show",
+    "access": null,
+    "description": "show screen",
+    "lineNumber": 86,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "callback",
+        "description": "fired when screen is really displayed."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "any"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "data to transmit to screen"
+      }
+    ]
+  },
+  {
+    "__docId__": 35,
+    "kind": "method",
+    "name": "hide",
+    "memberof": "src/screens/ScreenBase.js~ScreenBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenBase.js~ScreenBase#hide",
+    "access": null,
+    "description": "hide screen",
+    "lineNumber": 94,
+    "params": []
+  },
+  {
+    "__docId__": 36,
+    "kind": "file",
+    "name": "src/screens/ScreenFlashBase.js",
+    "content": "import ScreenBase from \"src/screens/ScreenBase\"\n\n\n/**\n* **Events:**\n* - onfinished : fired when screen is completed.\n */\nexport default class ScreenFlashBase extends ScreenBase{\n\n\tconstructor(dataObject) {\n\t\tsuper(Object.assign({\n\t\t\tstage: null,\n\t\t\tscreenManager: null,\n\t\t\tscreenName: null\n\t\t}, dataObject));\n\n\t\tthis._config.rid = this._screenName + \".FLASHSCREEN.CONFIG\";\n\t}\n\n\n\tkill() {\n\t\tif (this._killed) return;\n\n\t\tif (this.screen) {\n\t\t\tthis.hide();\n\t\t\tthis.screen = null;\n\t\t}\n\t\tthis._lib = null;\n\t\twindow[this._screenName] = null;\n\t\twindow[this._screenName + \"_images\"] = null;\n\n\t\tsuper.kill();\n\t}\n\n\n\t/**\n\t * init (async) screen (clipcjs)\n\t * @param  {Function} callback \n\t */\n\tinit(callback) { \n\t\tthis.jx.db.load({id: this._screenName + \".FLASHSCREEN.SCREEN\"}, ()=>{\n\t\t\tthis._lib = this.cc({rid: this._config.rid, stage: this.stage, exclude: [], \n\t\t\t\ttoFreeze: [], visible: false});\n\t\t\tsuper.init(callback);\n\t\t});\n\t}\n\n\n\t/**\n\t * initScreen after this._lib (ClipCJS) is ready.\n\t */\n\t_initScreen() {\n\t\tthis.ccid({id: \"screen\", type:\"Clip\", view: this._lib.getMC(\"SCREEN\")});\n\t}\n\n\n\t/**\n\t * show screen\n\t * @param  {Function} callback fired when screen is really displayed.\n\t * @param  {any}   data     data to transmit to screen\n\t */\n\tshow(callback, data) {\n\t\tsuper.show(()=>{\n\t\t\tthis.stage.addChild(this._lib);\n\t\t\tthis._lib.visible = true;\n\t\t\tthis._lib.unfreeze();\n\n\t\t\tcallback({target: this});\n\t\t});\n\t}\n\n\n\t/**\n\t * hide screen\n\t */\n\thide() {\n\t\tsuper.hide();\n\t\tthis._lib.visible = false;\n\t\tthis._lib.freeze();\n\t\tthis.stage.removeChild(this._lib);\n\t}\n\n}\n\n\n\n",
+    "static": true,
+    "longname": "src/screens/ScreenFlashBase.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 37,
+    "kind": "class",
+    "name": "ScreenFlashBase",
+    "memberof": "src/screens/ScreenFlashBase.js",
+    "static": true,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "access": null,
+    "export": true,
+    "importPath": "./src/screens/ScreenFlashBase.js",
+    "importStyle": "ScreenFlashBase",
+    "description": "**Events:**\n- onfinished : fired when screen is completed.",
+    "lineNumber": 8,
+    "interface": false,
+    "extends": [
+      "src/screens/ScreenBase~ScreenBase"
+    ]
+  },
+  {
+    "__docId__": 38,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dataObject",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 39,
+    "kind": "method",
+    "name": "kill",
+    "memberof": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase#kill",
+    "access": null,
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 40,
+    "kind": "member",
+    "name": "screen",
+    "memberof": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "static": false,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase#screen",
+    "access": null,
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 41,
+    "kind": "member",
+    "name": "_lib",
+    "memberof": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "static": false,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase#_lib",
+    "access": null,
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 42,
+    "kind": "method",
+    "name": "init",
+    "memberof": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase#init",
+    "access": null,
+    "description": "init (async) screen (clipcjs)",
+    "lineNumber": 40,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "callback",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 43,
+    "kind": "member",
+    "name": "_lib",
+    "memberof": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "static": false,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase#_lib",
+    "access": null,
+    "description": null,
+    "lineNumber": 42,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 44,
+    "kind": "method",
+    "name": "_initScreen",
+    "memberof": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase#_initScreen",
+    "access": null,
+    "description": "initScreen after this._lib (ClipCJS) is ready.",
+    "lineNumber": 52,
+    "params": []
+  },
+  {
+    "__docId__": 45,
+    "kind": "method",
+    "name": "show",
+    "memberof": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase#show",
+    "access": null,
+    "description": "show screen",
+    "lineNumber": 62,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "callback",
+        "description": "fired when screen is really displayed."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "any"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "data to transmit to screen"
+      }
+    ]
+  },
+  {
+    "__docId__": 46,
+    "kind": "method",
+    "name": "hide",
+    "memberof": "src/screens/ScreenFlashBase.js~ScreenFlashBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/screens/ScreenFlashBase.js~ScreenFlashBase#hide",
+    "access": null,
+    "description": "hide screen",
+    "lineNumber": 76,
+    "params": []
+  },
+  {
+    "__docId__": 48,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 49,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 64,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 77,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 78,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 79,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 80,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 81,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 82,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 83,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 84,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 85,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 87,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 88,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 89,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 90,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 91,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 92,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 93,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 94,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": "",
+    "lineNumber": 193,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 96,
+    "kind": "external",
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 97,
+    "kind": "external",
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 98,
+    "kind": "external",
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 99,
+    "kind": "external",
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 100,
+    "kind": "external",
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 101,
+    "kind": "external",
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 102,
+    "kind": "external",
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 103,
+    "kind": "external",
+    "name": "AudioContext",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
+    "access": null,
+    "description": "",
+    "lineNumber": 34,
+    "builtinExternal": true
+  }
+]

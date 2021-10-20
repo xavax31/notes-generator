@@ -1,0 +1,173 @@
+{
+    "formatJSON": "SimpleJSON2",
+    "projectData": [
+        {
+            "id": "Informations",
+            "type": "DataObject",
+            "value": {
+                "project": {
+                    "permanentLock": false,
+                    "id": "notes-generator",
+                    "title": "",
+                    "type": "ApplicationBabelHTML5",
+                    "description": "Modèle jx avec Screens Manager",
+                    "version": "1.0",
+                    "appCodeVersion": "intern: src v1.0",
+                    "gitRepository": "",
+                    "previewIndex": "",
+                    "status": "new",
+                    "dateValidation": "",
+                    "dateGabarit": "",
+                    "devNumDaysCode": 0,
+                    "dateBeta": "",
+                    "devNumDaysDebug": 0,
+                    "dateRelease": "",
+                    "datePublication": "",
+                    "devNumDaysCleanup": 0,
+                    "publication": "all",
+                    "assignedUsers": "all",
+                    "Langues": "fr",
+                    "Doc": "<a href='url.com' target='_blank' >Doc Moteur</a> ",
+                    "BugReport": "<a href='url.com' target='_blank' >Bug Report link</a>",
+                    "configPath": "/projects/milan-presse/notes-generator/etc/editor/editor.json"
+                },
+                "engine": {
+                    "type": "jx-engine",
+                    "jxVersion": "intern: src/jx v0.9",
+                    "jxMinify": "auto",
+                    "modulePath": ".",
+                    "mainCtrl": "index",
+                    "srcPath": "js/src",
+                    "defaultViewType": "CJS",
+                    "screenRatio": "auto",
+                    "framerate": 24,
+                    "backgroundColor": "#ffffff",
+                    "startButton": "no",
+                    "startButtonHeightPercent": 40
+                }
+            },
+            "preload": false
+        },
+        {
+            "id": "PrincipeGeneral",
+            "type": "FileItem",
+            "asset": {
+                "type": "PDF",
+                "src": "docs/PRINCIPE_GENERAL.pdf"
+            }
+        },
+        {
+            "id": "ScenarioFile",
+            "type": "FileItem",
+            "asset": {
+                "type": "PDF",
+                "src": "docs/SCENARIO.pdf"
+            }
+        },
+        {
+            "id": "Commentaires",
+            "type": "Text",
+            "value": ""
+        },
+        {
+            "id": "Configuration",
+            "type": "DataObject",
+            "value": {},
+            "preload": false
+        },
+        {
+            "src": "assets/sounds/MUSIC.mp3",
+            "id": "MUSIC",
+            "type": "Sound",
+            "preload": true
+        },
+        {
+            "src": "assets/images/SPLASHSCREEN.jpg",
+            "id": "SPLASHSCREEN",
+            "type": "Image",
+            "preload": true
+        },
+        {
+            "src": "assets/images/START_BUTTON.png",
+            "id": "START_BUTTON",
+            "type": "Image",
+            "preload": true
+        },
+        {
+            "preload": false,
+            "src": "assets/COMMON_FLASH_LIBRARY",
+            "type": "Flashtml",
+            "compType": "Flashtml",
+            "id": "COMMON_FLASH_LIBRARY.SCREEN"
+        },
+        {
+            "id": "COMMON_FLASH_LIBRARY.CONFIG",
+            "type": "FlashtmlPack",
+            "value": {
+                "resourceID": "COMMON_FLASH_LIBRARY.SCREEN",
+                "framerate": 24,
+                "optimised": false
+            }
+        },
+        {
+            "id": "CREDITS_APP.CONFIG",
+            "type": "Rectangle",
+            "value": {
+                "x": 1164,
+                "y": 675,
+                "width": 60,
+                "height": 60
+            }
+        },
+        {
+            "src": "assets/images/CREDITS_BUTTON.png",
+            "id": "CREDITS_APP.BUTTON",
+            "type": "Image",
+            "preload": true
+        },
+        {
+            "src": "assets/images/CREDITS.jpg",
+            "id": "CREDITS_APP.IMAGE",
+            "type": "Image",
+            "preload": true
+        },
+        {
+            "id": "BT_REPLAY_APP.CONFIG",
+            "type": "Rectangle",
+            "value": {
+                "x": 1220,
+                "y": 60,
+                "width": 100,
+                "height": 100
+            }
+        },
+        {
+            "preload": false,
+            "src": "assets/INTRO/INTRO.mp4",
+            "id": "INTRO.VIDEO",
+            "type": "Video"
+        },
+        {
+            "preload": false,
+            "src": "assets/SCREEN_00/SCREEN_00",
+            "type": "Flashtml",
+            "compType": "Flashtml",
+            "id": "SCREEN_00.FLASHSCREEN.SCREEN"
+        },
+        {
+            "id": "SCREEN_00.FLASHSCREEN.CONFIG",
+            "type": "FlashtmlPack",
+            "value": {
+                "resourceID": "SCREEN_00.FLASHSCREEN.SCREEN",
+                "framerate": 24,
+                "optimised": false
+            }
+        },
+        {
+            "src": "assets/sounds/B_SAMPLE.mp3",
+            "id": "SCREEN_00.B_SAMPLE",
+            "type": "Sound",
+            "preload": true
+        }
+    ]
+}

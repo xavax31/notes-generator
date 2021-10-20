@@ -1,0 +1,28 @@
+{
+  "name": "bower",
+  "authors": [
+    "xb <xavier.boisnon@gmail.com>"
+  ],
+  "description": "desc",
+  "main": "bower.json",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "http://code.jquery.com/jquery-2.2.2.min.js",
+    "movieclipjs": "https://code.createjs.com/movieclip-0.8.1.min.js",
+    "requirejs": "http://requirejs.org/docs/release/2.2.0/minified/require.js",
+    "spin": "http://fgnass.github.io/spin.js/spin.min.js",
+    "webfont": "https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.24/webfontloader.js",
+    "createjs.min": "https://code.createjs.com/createjs-2015.11.26.min.js",
+    "createjs.combined": "https://code.createjs.com/createjs-2015.11.26.combined.js"
+  }
+}

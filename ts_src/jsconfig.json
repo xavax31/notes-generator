@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "baseUrl": ".",
+        "paths": {
+          "jx/*": ["../../../../dev/mp-framework/current/engine/ts_src/jx/*"]
+        }
+    
+    },
+    "exclude": [
+        "node_modules",
+        "public",
+        "etc",
+        "**/node_modules/*"
+    ]
+
+}

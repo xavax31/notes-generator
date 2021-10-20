@@ -1,0 +1,14 @@
+{
+  "name": "createjs.min",
+  "_cacheHeaders": {
+    "ETag": "\"404315b-2e8a6-5264776aaecc0\"",
+    "Last-Modified": "Mon, 07 Dec 2015 04:40:59 GMT",
+    "Content-Type": "application/x-javascript"
+  },
+  "_release": "e-tag:404315b-2",
+  "main": "index.js",
+  "_source": "https://code.createjs.com/createjs-2015.11.26.min.js",
+  "_target": "*",
+  "_originalSource": "https://code.createjs.com/createjs-2015.11.26.min.js",
+  "_direct": true
+}

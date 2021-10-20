@@ -1,0 +1,14 @@
+{
+  "name": "movieclipjs.min",
+  "_cacheHeaders": {
+    "ETag": "\"4042d54-1150-516a4e8fe97c0\"",
+    "Last-Modified": "Fri, 22 May 2015 05:27:03 GMT",
+    "Content-Length": "4432",
+    "Content-Type": "application/x-javascript"
+  },
+  "_release": "e-tag:4042d54-1",
+  "main": "index.js",
+  "_source": "https://code.createjs.com/movieclip-0.8.1.min.js",
+  "_target": "*",
+  "_originalSource": "https://code.createjs.com/movieclip-0.8.1.min.js"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "webfont",
+  "_cacheHeaders": {
+    "Last-Modified": "Mon, 04 May 2015 18:20:57 GMT",
+    "Content-Type": "text/javascript; charset=UTF-8"
+  },
+  "main": "index.js",
+  "_source": "https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js",
+  "_target": "*",
+  "_originalSource": "https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"
+}

@@ -1,0 +1,13 @@
+{
+	"name": "notes-generator",
+	"version": "1.0.0",
+	"main": "src/index.js",
+	"author": "xb",
+	"license": "MIT",
+	"scripts": {
+		"build": "tsc",
+		"start": "tsc & live-server public --open=index_debug.html --port=8086",
+		"rsync_to_project_music": "./etc/rsync_to_music_local.sh",
+		"rsync_to_project_music:help": "Send build to project local 'music'"
+	}
+}

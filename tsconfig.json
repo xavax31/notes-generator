@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"target": "ES5",
+		"baseUrl": "ts_src",
+		"outDir": "public/js/src",
+		"sourceMap": true,
+
+		"allowJs": true,
+		"module": "amd",
+		"allowUnreachableCode": true,
+		"allowUnusedLabels": true,
+		"suppressExcessPropertyErrors": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"watch": true,
+		"isolatedModules": true
+	},
+	"include": ["ts_src/**/*"]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "spin",
+  "_cacheHeaders": {
+    "Last-Modified": "Fri, 24 Jul 2015 13:42:07 GMT",
+    "Content-Length": "4277",
+    "Content-Type": "application/javascript; charset=utf-8"
+  },
+  "main": "index.js",
+  "_source": "http://fgnass.github.io/spin.js/spin.min.js",
+  "_target": "*",
+  "_originalSource": "http://fgnass.github.io/spin.js/spin.min.js"
+}
