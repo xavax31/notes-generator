@@ -88,6 +88,22 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
             }
             console.log(options);
             this.allNotesInfo = options;
+            var optionsPresets = presets_1.presets.map(function (value) {
+                return { id: value.id, desc: value.desc, type: value.type };
+            });
+            this.addComboBox({
+                id: "preset",
+                width: "400px",
+                description: "Preset",
+                options: optionsPresets,
+                onchange: function (evt) {
+                    console.log(evt);
+                    var presetChoosen = presets_1.presets.filter(function (value) { return evt.target.value === value.id; });
+                    console.log(presetChoosen);
+                    _this.setConfig(presetChoosen[0].params);
+                    _this._refresh(true);
+                },
+            });
             this.addComboBox({
                 id: "tonique",
                 description: "Tonique",
@@ -163,22 +179,6 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
                 max: 20,
                 step: 1,
                 value: 3,
-            });
-            var optionsPresets = presets_1.presets.map(function (value) {
-                return { id: value.id, desc: value.desc, type: value.type };
-            });
-            this.addComboBox({
-                id: "preset",
-                width: "400px",
-                description: "Preset",
-                options: optionsPresets,
-                onchange: function (evt) {
-                    console.log(evt);
-                    var presetChoosen = presets_1.presets.filter(function (value) { return evt.target.value === value.id; });
-                    console.log(presetChoosen);
-                    _this.setConfig(presetChoosen[0].params);
-                    _this._refresh(true);
-                },
             });
             // this.addNumberItem({id: "easing", description: "elasticité", min: 0, step: 0.1, value: 0.1});
             // this.addNumberItem({id: "factor", description: "factor", min: 0, step: 0.1, value: 0.8});

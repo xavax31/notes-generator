@@ -95,6 +95,29 @@ export default class UserMenu extends SimpleDOMView {
 		console.log(options);
 		this.allNotesInfo = options;
 
+		let optionsPresets = presets.map((value) => {
+			return { id: value.id, desc: value.desc, type: value.type };
+		});
+
+		this.addComboBox({
+			id: "preset",
+			width: "400px",
+			description: "Preset",
+			options: optionsPresets,
+			onchange: (evt) => {
+				console.log(evt);
+
+				let presetChoosen = presets.filter(
+					(value) => evt.target.value === value.id
+				);
+				console.log(presetChoosen);
+
+				this.setConfig(presetChoosen[0].params);
+
+				this._refresh(true);
+			},
+		});
+
 		this.addComboBox({
 			id: "tonique",
 			description: "Tonique",
@@ -182,28 +205,6 @@ export default class UserMenu extends SimpleDOMView {
 			value: 3,
 		});
 
-		let optionsPresets = presets.map((value) => {
-			return { id: value.id, desc: value.desc, type: value.type };
-		});
-
-		this.addComboBox({
-			id: "preset",
-			width: "400px",
-			description: "Preset",
-			options: optionsPresets,
-			onchange: (evt) => {
-				console.log(evt);
-
-				let presetChoosen = presets.filter(
-					(value) => evt.target.value === value.id
-				);
-				console.log(presetChoosen);
-
-				this.setConfig(presetChoosen[0].params);
-
-				this._refresh(true);
-			},
-		});
 		// this.addNumberItem({id: "easing", description: "elasticité", min: 0, step: 0.1, value: 0.1});
 		// this.addNumberItem({id: "factor", description: "factor", min: 0, step: 0.1, value: 0.8});
 		// this.addNumberItem({id: "release", description: "temps de coulure après relachement souris", min: 0, step: 1, value: 200});
