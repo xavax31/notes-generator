@@ -117,6 +117,21 @@ define(["require", "exports"], function (require, exports) {
             desc: "Mode altéré 7dim (VII) ",
             pattern: [1, 2, 1, 2, 2, 1, 3],
         },
+        {
+            id: "gamme_pentatonique",
+            desc: "GAMME PENTATONIQUE",
+            type: "section",
+        },
+        {
+            id: "pentatonique_mineure",
+            desc: "Gamme Pentatonique Mineure ",
+            pattern: [3, 2, 2, 3, 2],
+        },
+        {
+            id: "pentatonique_majeur",
+            desc: "Gamme Pentatonique Majeure ",
+            pattern: [2, 2, 3, 2, 3],
+        },
         { id: "gamme_arabe", desc: "GAMME ARABE", type: "section" },
         { id: "arabe", desc: "Mode arabe (I) ", pattern: [2, 2, 1, 1, 2, 2, 2] },
         {
