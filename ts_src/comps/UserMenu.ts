@@ -2,6 +2,7 @@ import SimpleDOMView from "jx/comps/SimpleDOMView";
 import ComboBox from "jx/comps/ComboBox";
 import { presets } from "./presets";
 import { gammes } from "./gammes";
+import VisualComponentDOM from "jx/comps/visualcomponent/VisualComponentDOM";
 
 export default class UserMenu extends SimpleDOMView {
 	allNotesInfo: any[];
@@ -30,10 +31,9 @@ export default class UserMenu extends SimpleDOMView {
 	_initSync() {
 		super._initSync();
 
-		this.view.css("position", "absolute");
-		this.view.css("padding", "3px");
-		this.view.css("top", "40px");
-		this.width = this.dataObject.width;
+		this.view.addClass("user-menu");
+
+		// this.width = this.dataObject.width;
 
 		// this.background = this.cc({rid: "BACKGROUND", render: "DOM", alpha: 0.3, width: this.dataObject.width, height: this.dataObject.height});
 		// this.addChild(this.background);
@@ -99,40 +99,29 @@ export default class UserMenu extends SimpleDOMView {
 			return { id: value.id, desc: value.desc, type: value.type };
 		});
 
-		this.addComboBox({
-			id: "preset",
-			width: "400px",
-			description: "Preset",
-			options: optionsPresets,
-			onchange: (evt) => {
-				console.log(evt);
-
-				let presetChoosen = presets.filter(
-					(value) => evt.target.value === value.id
-				);
-				console.log(presetChoosen);
-
-				this.setConfig(presetChoosen[0].params);
-
-				this._refresh(true);
-			},
-		});
-
-		this.addComboBox({
+		this.addList({
 			id: "tonique",
 			description: "Tonique",
+			direction: "horizontal",
+			width: "100%",
+			border: false,
 			options: notes,
+			selectedBackgroundColor: "#03A62C",
+			selectedColor: "white",
 			onchange: (evt) => {
 				console.log(evt.target.value);
-
+				this.noteMin.value = this.findNoteIndex(evt.target.value);
 				this._refresh();
 			},
 		});
 
-		this.addComboBox({
+		this.addList({
 			id: "gamme",
 			description: "Gamme/Mode",
-			width: "400px",
+			width: "100%",
+			height: "200px",
+			selectedBackgroundColor: "#a9bf04",
+			selectedColor: "black",
 			options: gammes.map((value) => {
 				return {
 					id: value.id,
@@ -149,6 +138,25 @@ export default class UserMenu extends SimpleDOMView {
 				console.log(evt.target.value);
 
 				this._refresh();
+			},
+		});
+
+		this.addComboBox({
+			id: "preset",
+			width: "100%",
+			description: "Preset",
+			options: optionsPresets,
+			onchange: (evt) => {
+				console.log(evt);
+
+				let presetChoosen = presets.filter(
+					(value) => evt.target.value === value.id
+				);
+				console.log(presetChoosen);
+
+				this.setConfig(presetChoosen[0].params);
+
+				this._refresh(true);
 			},
 		});
 
@@ -183,7 +191,7 @@ export default class UserMenu extends SimpleDOMView {
 
 				this._refresh();
 			},
-			value: "oui",
+			value: "non",
 		});
 		// this.addNumberItem({id: "indexMin", description: "indexMin", min: 0, max:100, step: 1, value: 0});
 		// this.addNumberItem({id: "indexMax", description: "indexMax", min: 0, max:100, step: 1, value: 20});
@@ -312,6 +320,7 @@ export default class UserMenu extends SimpleDOMView {
 			description,
 			options,
 		});
+		item.view.find("#value").css("text-align", "left");
 		item.view.css("position", "relative");
 		item.view.css("display", "block");
 		item.view.css("text-align", "left");
@@ -319,6 +328,127 @@ export default class UserMenu extends SimpleDOMView {
 		item.view.find("#value").css("width", width);
 		item.value = value;
 		item.onchange.add(onchange);
+		this.addChild(item);
+		// item.width = this.dataObject.width;
+		this[id] = item;
+	}
+
+	addList({
+		id,
+		options,
+		onchange,
+		description,
+		value,
+		width = "100px",
+		height = "100%",
+		direction = "vertical",
+		border = true,
+		selectedBackgroundColor = "black",
+		selectedColor = "white",
+	}: {
+		id: any;
+		options: any;
+		onchange: any;
+		description: any;
+		value?: any;
+		width?: any;
+		height?: any;
+		border?: boolean;
+		direction?: "vertical" | "horizontal";
+		selectedBackgroundColor?: string;
+		selectedColor?: string;
+	}) {
+		// let item = {
+		// 	isJXComponent: true,
+		// 	view: $("<div></div>"),
+		// };
+		let item = this.cc({
+			type: VisualComponentDOM,
+			view: $("<div></div>"),
+			render: "DOM",
+			x: 0,
+			y: 0,
+			description,
+			options,
+		});
+
+		item.view.css({
+			height,
+			overflow: "auto",
+			// "scrollbar-color": "red",
+			// "scrollbar-width": "none",
+			display: direction === "vertical" ? "inline-block" : "block",
+			padding: "3px",
+		});
+
+		if (border) {
+			item.view.css({
+				border: "1px solid #dddddd",
+				borderRadius: "10px",
+			});
+		}
+
+		item.refreshOptions = () => {
+			item.view.empty();
+			for (let j = 0; j < options.length; j++) {
+				let option = options[j];
+				if (typeof option === "string") {
+					option = {
+						id: option,
+					};
+				}
+				let child = $(`<div>${option.desc || option.id}</div>`);
+				child.css({
+					fontFamily: "Comfortaa",
+					fontSize: "12px",
+					lineHeight: "20px",
+					fontWeight: 700,
+				});
+				if (option.type !== "section") {
+					child.on("click", () => {
+						item.value = option.id;
+						item.refreshOptions();
+						onchange({ target: item });
+					});
+				} else {
+					child.css("backgroundColor", "#222222");
+					child.css("color", "white");
+					child.css("padding", "5px");
+				}
+
+				if (direction === "horizontal") {
+					let size = "20";
+					child.css({
+						display: "inline-block",
+						padding: "2px",
+						// margin: "1px",
+						minWidth: size + "px",
+						height: size + "px",
+						borderRadius: size + "px",
+						// backgroundColor: "red",
+						textAlign: "center",
+					});
+				}
+
+				if (option.id === item.value) {
+					child.css("backgroundColor", selectedBackgroundColor);
+					child.css("color", selectedColor);
+				}
+				item.view.append(child);
+			}
+		};
+
+		item.refreshOptions();
+
+		// item.view.find("#value").attr("size", 10);
+		// item.view.find("#value").css("text-align", "left");
+		// item.view.css("position", "relative");
+		// item.view.css("display", "block");
+		// item.view.css("text-align", "left");
+		// item.view.css("marginBottom", "5px");
+		// item.view.find("#value").css("width", width);
+		// item.value = value;
+		// item.onchange.add(onchange);
 		this.addChild(item);
 		// item.width = this.dataObject.width;
 		this[id] = item;

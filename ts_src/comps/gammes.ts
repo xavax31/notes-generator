@@ -1,6 +1,43 @@
 export const gammes = [
 	{ id: "chromatic", desc: "Chromatique" },
 	// Gamme Majeur
+	{ id: "favoris", desc: "FAVORIS", type: "section" },
+	{
+		id: "mode1",
+		desc: "Gamme Majeure - Mode 1",
+		pattern: [2, 2, 1, 2, 2, 2, 1],
+	},
+	{
+		id: "phrygien",
+		desc: "Mode de Mi - Phrygien (III) ",
+		pattern: [1, 2, 2, 2, 1, 2, 2],
+	},
+	{
+		id: "eolien",
+		desc: "Mode de La - éolien (VI) - Mineur naturel ",
+		pattern: [2, 1, 2, 2, 1, 2, 2],
+	},
+	{
+		id: "minor_melodique",
+		desc: "Mode Mélodique (I) ",
+		pattern: [2, 1, 2, 2, 2, 2, 1],
+	},
+	{
+		id: "minor_hamonic",
+		desc: "Mineur Harmonique (I) ",
+		pattern: [2, 1, 2, 2, 1, 3, 1],
+	},
+	{
+		id: "phrygien_espagnol",
+		desc: "Mode Phrygien espagnol (V) ",
+		pattern: [1, 3, 1, 2, 1, 2, 2],
+	},
+	{
+		id: "pentatonique_mineure",
+		desc: "Gamme Pentatonique Mineure ",
+		pattern: [3, 2, 2, 3, 2],
+	},
+
 	{ id: "gamme_majeure", desc: "GAMME MAJEURE", type: "section" },
 	{
 		id: "mode1",

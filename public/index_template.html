@@ -1,42 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>${title}</title>
-    <meta name="description" content="${title}">
-    <!-- <link href="js/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="css/fonts.css?v=1.0">
-    <link rel="stylesheet" href="css/styles.css?v=1.0">
-    <script>
-        var overrideJXConfig={
-            mode : '${mode}',
-            jxPath : '${jxPath}',
-            src : '${mainCtrlSrc}',
-            debug: ${debug},
-            splashScreen: "assets/images/SPLASHSCREEN.jpg",
-            jxsrc: ${jxsrc}
+	<head>
+		<meta charset="utf-8" />
+		<title>${title}</title>
+		<meta name="viewport" content="width=device-width" />
 
-        }
-    </script>
+		<meta name="description" content="${title}" />
+		<!-- <link href="js/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+		<link rel="stylesheet" href="css/fonts.css?v=1.0" />
+		<link rel="stylesheet" href="css/styles.css?v=1.0" />
+		<script>
+			var overrideJXConfig={
+			    mode : '${mode}',
+			    jxPath : '${jxPath}',
+			    src : '${mainCtrlSrc}',
+			    debug: ${debug},
+			    splashScreen: "assets/images/SPLASHSCREEN.jpg",
+			    jxsrc: ${jxsrc}
 
+			}
+		</script>
+	</head>
+	<body bgcolor="${backgroundColor}">
+		<!-- Keep this order for better performances -->
 
-</head>
-<body bgcolor="${backgroundColor}">
-<!-- Keep this order for better performances -->
+		<script src="${pathFrameworkLibs}/jquery/index.js"></script>
+		<script src="${pathFrameworkLibs}/spin/index.js"></script>
+		<script src="${pathJXLauncher}"></script>
 
-    <script src="${pathFrameworkLibs}/jquery/index.js"></script>
-    <script src="${pathFrameworkLibs}/spin/index.js"></script>
-    <script src="${pathJXLauncher}"></script> 
-
-    <script src="${pathFrameworkLibs}/webfont/index.js"></script>
-    <script src="${pathFrameworkLibs}/signals.min.js"></script>
-    <script src="${pathFrameworkLibs}/mediaelement.min.js"></script>
-    <script src="${pathFrameworkLibs}/createjs.min/index.js"></script>
-    <script src="${pathFrameworkLibs}/bayamFrontCom.js"></script> 
-    <!-- <script src="${pathFrameworkLibs}/bootstrap/js/bootstrap.min.js"></script> -->
-    <script src="${pathFrameworkLibs}/requirejs/index.js"></script>
-    <script src="js/jxapp.js"></script> 
-
-</body>
+		<script src="${pathFrameworkLibs}/webfont/index.js"></script>
+		<script src="${pathFrameworkLibs}/signals.min.js"></script>
+		<script src="${pathFrameworkLibs}/mediaelement.min.js"></script>
+		<script src="${pathFrameworkLibs}/createjs.min/index.js"></script>
+		<script src="${pathFrameworkLibs}/bayamFrontCom.js"></script>
+		<!-- <script src="${pathFrameworkLibs}/bootstrap/js/bootstrap.min.js"></script> -->
+		<script src="${pathFrameworkLibs}/requirejs/index.js"></script>
+		<script src="js/jxapp.js"></script>
+	</body>
 </html>

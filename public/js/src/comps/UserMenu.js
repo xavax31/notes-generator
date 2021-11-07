@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./presets", "./gammes"], function (require, exports, SimpleDOMView_1, ComboBox_1, presets_1, gammes_1) {
+define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./presets", "./gammes", "jx/comps/visualcomponent/VisualComponentDOM"], function (require, exports, SimpleDOMView_1, ComboBox_1, presets_1, gammes_1, VisualComponentDOM_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var UserMenu = /** @class */ (function (_super) {
@@ -29,10 +29,8 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
         UserMenu.prototype._initSync = function () {
             var _this = this;
             _super.prototype._initSync.call(this);
-            this.view.css("position", "absolute");
-            this.view.css("padding", "3px");
-            this.view.css("top", "40px");
-            this.width = this.dataObject.width;
+            this.view.addClass("user-menu");
+            // this.width = this.dataObject.width;
             // this.background = this.cc({rid: "BACKGROUND", render: "DOM", alpha: 0.3, width: this.dataObject.width, height: this.dataObject.height});
             // this.addChild(this.background);
             // this.addButton({id:"prevBTN", label: "Prev", onclick: evt=>this._prevScene() });
@@ -91,32 +89,28 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
             var optionsPresets = presets_1.presets.map(function (value) {
                 return { id: value.id, desc: value.desc, type: value.type };
             });
-            this.addComboBox({
-                id: "preset",
-                width: "400px",
-                description: "Preset",
-                options: optionsPresets,
-                onchange: function (evt) {
-                    console.log(evt);
-                    var presetChoosen = presets_1.presets.filter(function (value) { return evt.target.value === value.id; });
-                    console.log(presetChoosen);
-                    _this.setConfig(presetChoosen[0].params);
-                    _this._refresh(true);
-                },
-            });
-            this.addComboBox({
+            this.addList({
                 id: "tonique",
                 description: "Tonique",
+                direction: "horizontal",
+                width: "100%",
+                border: false,
                 options: notes,
+                selectedBackgroundColor: "#03A62C",
+                selectedColor: "white",
                 onchange: function (evt) {
                     console.log(evt.target.value);
+                    _this.noteMin.value = _this.findNoteIndex(evt.target.value);
                     _this._refresh();
                 },
             });
-            this.addComboBox({
+            this.addList({
                 id: "gamme",
                 description: "Gamme/Mode",
-                width: "400px",
+                width: "100%",
+                height: "200px",
+                selectedBackgroundColor: "#a9bf04",
+                selectedColor: "black",
                 options: gammes_1.gammes.map(function (value) {
                     return {
                         id: value.id,
@@ -131,6 +125,19 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
                 onchange: function (evt) {
                     console.log(evt.target.value);
                     _this._refresh();
+                },
+            });
+            this.addComboBox({
+                id: "preset",
+                width: "100%",
+                description: "Preset",
+                options: optionsPresets,
+                onchange: function (evt) {
+                    console.log(evt);
+                    var presetChoosen = presets_1.presets.filter(function (value) { return evt.target.value === value.id; });
+                    console.log(presetChoosen);
+                    _this.setConfig(presetChoosen[0].params);
+                    _this._refresh(true);
                 },
             });
             this.addComboBox({
@@ -160,7 +167,7 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
                     console.log(evt.target.value);
                     _this._refresh();
                 },
-                value: "oui",
+                value: "non",
             });
             // this.addNumberItem({id: "indexMin", description: "indexMin", min: 0, max:100, step: 1, value: 0});
             // this.addNumberItem({id: "indexMax", description: "indexMax", min: 0, max:100, step: 1, value: 20});
@@ -254,6 +261,7 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
                 description: description,
                 options: options,
             });
+            item.view.find("#value").css("text-align", "left");
             item.view.css("position", "relative");
             item.view.css("display", "block");
             item.view.css("text-align", "left");
@@ -261,6 +269,100 @@ define(["require", "exports", "jx/comps/SimpleDOMView", "jx/comps/ComboBox", "./
             item.view.find("#value").css("width", width);
             item.value = value;
             item.onchange.add(onchange);
+            this.addChild(item);
+            // item.width = this.dataObject.width;
+            this[id] = item;
+        };
+        UserMenu.prototype.addList = function (_a) {
+            var id = _a.id, options = _a.options, onchange = _a.onchange, description = _a.description, value = _a.value, _b = _a.width, width = _b === void 0 ? "100px" : _b, _c = _a.height, height = _c === void 0 ? "100%" : _c, _d = _a.direction, direction = _d === void 0 ? "vertical" : _d, _e = _a.border, border = _e === void 0 ? true : _e, _f = _a.selectedBackgroundColor, selectedBackgroundColor = _f === void 0 ? "black" : _f, _g = _a.selectedColor, selectedColor = _g === void 0 ? "white" : _g;
+            // let item = {
+            // 	isJXComponent: true,
+            // 	view: $("<div></div>"),
+            // };
+            var item = this.cc({
+                type: VisualComponentDOM_1.default,
+                view: $("<div></div>"),
+                render: "DOM",
+                x: 0,
+                y: 0,
+                description: description,
+                options: options,
+            });
+            item.view.css({
+                height: height,
+                overflow: "auto",
+                // "scrollbar-color": "red",
+                // "scrollbar-width": "none",
+                display: direction === "vertical" ? "inline-block" : "block",
+                padding: "3px",
+            });
+            if (border) {
+                item.view.css({
+                    border: "1px solid #dddddd",
+                    borderRadius: "10px",
+                });
+            }
+            item.refreshOptions = function () {
+                item.view.empty();
+                var _loop_1 = function (j) {
+                    var option = options[j];
+                    if (typeof option === "string") {
+                        option = {
+                            id: option,
+                        };
+                    }
+                    var child = $("<div>" + (option.desc || option.id) + "</div>");
+                    child.css({
+                        fontFamily: "Comfortaa",
+                        fontSize: "12px",
+                        lineHeight: "20px",
+                        fontWeight: 700,
+                    });
+                    if (option.type !== "section") {
+                        child.on("click", function () {
+                            item.value = option.id;
+                            item.refreshOptions();
+                            onchange({ target: item });
+                        });
+                    }
+                    else {
+                        child.css("backgroundColor", "#222222");
+                        child.css("color", "white");
+                        child.css("padding", "5px");
+                    }
+                    if (direction === "horizontal") {
+                        var size = "20";
+                        child.css({
+                            display: "inline-block",
+                            padding: "2px",
+                            // margin: "1px",
+                            minWidth: size + "px",
+                            height: size + "px",
+                            borderRadius: size + "px",
+                            // backgroundColor: "red",
+                            textAlign: "center",
+                        });
+                    }
+                    if (option.id === item.value) {
+                        child.css("backgroundColor", selectedBackgroundColor);
+                        child.css("color", selectedColor);
+                    }
+                    item.view.append(child);
+                };
+                for (var j = 0; j < options.length; j++) {
+                    _loop_1(j);
+                }
+            };
+            item.refreshOptions();
+            // item.view.find("#value").attr("size", 10);
+            // item.view.find("#value").css("text-align", "left");
+            // item.view.css("position", "relative");
+            // item.view.css("display", "block");
+            // item.view.css("text-align", "left");
+            // item.view.css("marginBottom", "5px");
+            // item.view.find("#value").css("width", width);
+            // item.value = value;
+            // item.onchange.add(onchange);
             this.addChild(item);
             // item.width = this.dataObject.width;
             this[id] = item;

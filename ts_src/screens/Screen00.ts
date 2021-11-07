@@ -35,7 +35,7 @@ export default class Screen00 extends ScreenFlashBase {
 	createdNotes = [];
 	menu: UserMenu;
 	generationConfig = {
-		random: true,
+		random: false,
 		gamme: "chromatic",
 		tonique: "do",
 		noteMin: "mi-1",
@@ -44,6 +44,7 @@ export default class Screen00 extends ScreenFlashBase {
 		intervalMax: 3,
 	};
 	currentMode = null;
+	factor = 1000 / window.innerWidth;
 
 	constructor(dataObject) {
 		super(Object.assign({ screenName: "SCREEN_00" }, dataObject));
@@ -84,6 +85,7 @@ export default class Screen00 extends ScreenFlashBase {
 
 	_initScreen() {
 		super._initScreen();
+		console.log("this.screen.view", this.screen.view);
 
 		this.modesPatterns = {};
 		for (let i = 0; i < gammes.length; i++) {
@@ -108,11 +110,12 @@ export default class Screen00 extends ScreenFlashBase {
 			height: 400,
 			color: "white",
 		});
-		this.drawLine(10);
-		this.drawLine(20);
-		this.drawLine(30);
-		this.drawLine(40);
-		this.drawLine(50);
+
+		this.drawLine(10 * this.factor);
+		this.drawLine(20 * this.factor);
+		this.drawLine(30 * this.factor);
+		this.drawLine(40 * this.factor);
+		this.drawLine(50 * this.factor);
 		this.screen.addChild(this.shape);
 		this.shape.y = this.infos.y;
 
@@ -133,6 +136,7 @@ export default class Screen00 extends ScreenFlashBase {
 		});
 		this.menu.view.css("top", "250px");
 		this.menu.view.css("left", "50px");
+		this.menu.view.css("marginTop", (50 * window.innerWidth) / 1000 + "px");
 		this.menu.setConfig(this.generationConfig);
 		// for (let i = 4; i < this.notes.length; i++) {
 		// 	this.addNote(this.notes[i], -1);
@@ -308,12 +312,12 @@ export default class Screen00 extends ScreenFlashBase {
 
 		let colorNote = "black";
 		if (this.generationConfig.tonique === noteName) {
-			colorNote = "#00AA00";
+			colorNote = "#03A62C";
 		}
 		let circle: ShapeCJS = this.cc({
 			type: ShapeCJS,
 			shapeType: "circle",
-			radius: 5,
+			radius: 5 * this.factor,
 			borderColor: colorNote,
 			color: filled ? colorNote : "rgba(0,0,0,0)",
 			borderWidth: 2,
@@ -322,9 +326,13 @@ export default class Screen00 extends ScreenFlashBase {
 		note.addChild(circle);
 
 		if (noteName.search("#") !== -1) {
-			let text: TextCJS = this.cc({ type: TextCJS, text: "#" });
-			text.x = -15;
-			text.y = -5;
+			let text: TextCJS = this.cc({
+				type: TextCJS,
+				text: "#",
+				style: { fontSize: 15 * this.factor },
+			});
+			text.x = -15 * this.factor;
+			text.y = -7 * this.factor;
 			note.addChild(text);
 		}
 
@@ -333,216 +341,216 @@ export default class Screen00 extends ScreenFlashBase {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 0)
-				.lineTo(10, 0)
+				.moveTo(-10 * this.factor, 0)
+				.lineTo(10 * this.factor, 0)
 				.endStroke();
 		} else if (octave === -1 && noteName.search(/^si/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, -5)
-				.lineTo(10, -5)
+				.moveTo(-10 * this.factor, -5 * this.factor)
+				.lineTo(10 * this.factor, -5 * this.factor)
 				.endStroke();
 		} else if (octave === -1 && noteName.search(/^la/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, -10)
-				.lineTo(10, -10)
+				.moveTo(-10 * this.factor, -10 * this.factor)
+				.lineTo(10 * this.factor, -10 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 0)
-				.lineTo(10, 0)
+				.moveTo(-10 * this.factor, 0)
+				.lineTo(10 * this.factor, 0)
 				.endStroke();
 		} else if (octave === -1 && noteName.search(/^sol/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, -15)
-				.lineTo(10, -15)
+				.moveTo(-10 * this.factor, -15 * this.factor)
+				.lineTo(10 * this.factor, -15 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, -5)
-				.lineTo(10, -5)
+				.moveTo(-10 * this.factor, -5 * this.factor)
+				.lineTo(10 * this.factor, -5 * this.factor)
 				.endStroke();
 		} else if (octave === -1 && noteName.search(/^fa/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, -20)
-				.lineTo(10, -20)
+				.moveTo(-10 * this.factor, -20 * this.factor)
+				.lineTo(10 * this.factor, -20 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, -10)
-				.lineTo(10, -10)
+				.moveTo(-10 * this.factor, -10 * this.factor)
+				.lineTo(10 * this.factor, -10 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 0)
-				.lineTo(10, 0)
+				.moveTo(-10 * this.factor, 0)
+				.lineTo(10 * this.factor, 0)
 				.endStroke();
 		} else if (octave === -1 && noteName.search(/^mi/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, -25)
-				.lineTo(10, -25)
+				.moveTo(-10 * this.factor, -25 * this.factor)
+				.lineTo(10 * this.factor, -25 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, -15)
-				.lineTo(10, -15)
+				.moveTo(-10 * this.factor, -15 * this.factor)
+				.lineTo(10 * this.factor, -15 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, -5)
-				.lineTo(10, -5)
+				.moveTo(-10 * this.factor, -5 * this.factor)
+				.lineTo(10 * this.factor, -5 * this.factor)
 				.endStroke();
 		} else if (octave === 1 && noteName.search(/^la/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 0)
-				.lineTo(10, 0)
+				.moveTo(-10 * this.factor, 0)
+				.lineTo(10 * this.factor, 0)
 				.endStroke();
 		} else if (octave === 1 && noteName.search(/^si/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 5)
-				.lineTo(10, 5)
+				.moveTo(-10 * this.factor, 5 * this.factor)
+				.lineTo(10 * this.factor, 5 * this.factor)
 				.endStroke();
 		} else if (octave === 2 && noteName.search(/^do/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 10)
-				.lineTo(10, 10)
+				.moveTo(-10 * this.factor, 10 * this.factor)
+				.lineTo(10 * this.factor, 10 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 0)
-				.lineTo(10, 0)
+				.moveTo(-10 * this.factor, 0)
+				.lineTo(10 * this.factor, 0)
 				.endStroke();
 		} else if (octave === 2 && noteName.search(/^ré/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 15)
-				.lineTo(10, 15)
+				.moveTo(-10 * this.factor, 15 * this.factor)
+				.lineTo(10 * this.factor, 15 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 5)
-				.lineTo(10, 5)
+				.moveTo(-10 * this.factor, 5 * this.factor)
+				.lineTo(10 * this.factor, 5 * this.factor)
 				.endStroke();
 		} else if (octave === 2 && noteName.search(/^mi/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 20)
-				.lineTo(10, 20)
+				.moveTo(-10 * this.factor, 20 * this.factor)
+				.lineTo(10 * this.factor, 20 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 10)
-				.lineTo(10, 10)
+				.moveTo(-10 * this.factor, 10 * this.factor)
+				.lineTo(10 * this.factor, 10 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 0)
-				.lineTo(10, 0)
+				.moveTo(-10 * this.factor, 0)
+				.lineTo(10 * this.factor, 0)
 				.endStroke();
 		} else if (octave === 2 && noteName.search(/^fa/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 25)
-				.lineTo(10, 25)
+				.moveTo(-10 * this.factor, 25 * this.factor)
+				.lineTo(10 * this.factor, 25 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 15)
-				.lineTo(10, 15)
+				.moveTo(-10 * this.factor, 15 * this.factor)
+				.lineTo(10 * this.factor, 15 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 5)
-				.lineTo(10, 5)
+				.moveTo(-10 * this.factor, 5 * this.factor)
+				.lineTo(10 * this.factor, 5 * this.factor)
 				.endStroke();
 		} else if (octave === 2 && noteName.search(/^sol/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 30)
-				.lineTo(10, 30)
+				.moveTo(-10 * this.factor, 30 * this.factor)
+				.lineTo(10 * this.factor, 30 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 20)
-				.lineTo(10, 20)
+				.moveTo(-10 * this.factor, 20 * this.factor)
+				.lineTo(10 * this.factor, 20 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 10)
-				.lineTo(10, 10)
+				.moveTo(-10 * this.factor, 10 * this.factor)
+				.lineTo(10 * this.factor, 10 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 0)
-				.lineTo(10, 0)
+				.moveTo(-10 * this.factor, 0)
+				.lineTo(10 * this.factor, 0)
 				.endStroke();
 		} else if (octave === 2 && noteName.search(/^la/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 35)
-				.lineTo(10, 35)
+				.moveTo(-10 * this.factor, 35 * this.factor)
+				.lineTo(10 * this.factor, 35 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 25)
-				.lineTo(10, 25)
+				.moveTo(-10 * this.factor, 25 * this.factor)
+				.lineTo(10 * this.factor, 25 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 15)
-				.lineTo(10, 15)
+				.moveTo(-10 * this.factor, 15 * this.factor)
+				.lineTo(10 * this.factor, 15 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 5)
-				.lineTo(10, 5)
+				.moveTo(-10 * this.factor, 5 * this.factor)
+				.lineTo(10 * this.factor, 5 * this.factor)
 				.endStroke();
 		} else if (octave === 2 && noteName.search(/^si/) !== -1) {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 40)
-				.lineTo(10, 40)
+				.moveTo(-10 * this.factor, 40 * this.factor)
+				.lineTo(10 * this.factor, 40 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 30)
-				.lineTo(10, 30)
+				.moveTo(-10 * this.factor, 30 * this.factor)
+				.lineTo(10 * this.factor, 30 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 20)
-				.lineTo(10, 20)
+				.moveTo(-10 * this.factor, 20 * this.factor)
+				.lineTo(10 * this.factor, 20 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 10)
-				.lineTo(10, 10)
+				.moveTo(-10 * this.factor, 10 * this.factor)
+				.lineTo(10 * this.factor, 10 * this.factor)
 				.endStroke();
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(-10, 0)
-				.lineTo(10, 0)
+				.moveTo(-10 * this.factor, 0)
+				.lineTo(10 * this.factor, 0 * this.factor)
 				.endStroke();
 		}
 
@@ -552,17 +560,20 @@ export default class Screen00 extends ScreenFlashBase {
 			let circleGraf: createjs.Graphics = circle.graphics;
 			circleGraf
 				.beginStroke("#000000")
-				.moveTo(xPos, 0)
-				.lineTo(xPos, direction * 40)
+				.moveTo(xPos * this.factor, 0)
+				.lineTo(xPos * this.factor, direction * 30 * this.factor)
 				.endStroke();
 		}
 
 		this.screen.addChild(note);
 
 		this.infos.actualX += this.infos.notesOffset;
-		note.x = this.infos.actualX;
+		note.x = this.infos.actualX * this.factor;
 		note.y =
-			this.infos.y + 60 - this.indexNotes[index] * 5 - octave * 7 * 5;
+			this.infos.y +
+			60 * this.factor -
+			this.indexNotes[index] * 5 * this.factor -
+			octave * 7 * 5 * this.factor;
 		this.createdNotes.push(note);
 	}
 

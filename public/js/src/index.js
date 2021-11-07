@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "jx/core/presets/StageGameModule", "screens/Screen00"], function (require, exports, StageGameModule_1, Screen00_1) {
+define(["require", "exports", "jx/core/presets/GameModule", "jx/comps/StageView", "screens/Screen00"], function (require, exports, GameModule_1, StageView_1, Screen00_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var MainCtrl = /** @class */ (function (_super) {
@@ -38,29 +38,58 @@ define(["require", "exports", "jx/core/presets/StageGameModule", "screens/Screen
          * INIT
          */
         MainCtrl.prototype.init = function (onInitialised) {
-            var _this = this;
-            this._configure(this.dataObject);
+            // this._configure(this.dataObject);
+            // this.stage = this.cc({ type: "SimpleDOMView" });
+            // this.stage.width = 300;
+            // this.stage.view.addClass("main-dom-view");
+            // var background = this.cc({
+            // 	id: "BACKGROUND",
+            // 	render: "DOM",
+            // 	resourceID: "BACKGROUND",
+            // });
+            //this.stage.addChild(background);
+            // this.menu = this.cc({ type: UserMenu, width: 500, height: 700 });
+            // this.stage.addChild(this.menu);
+            // this.hoursNum = this.cc({
+            // 	type: "InputNumber",
+            // 	render: "DOM",
+            // 	y: 100,
+            // 	description: "Nombre d'heures d'utilisation. (24h x 365 j = 8760)",
+            // });
+            // this.hoursNum.value = 9000;
+            // this.hoursNum.onchange.add((evt) => {
+            // 	this._formule();
+            // });
+            // this.stage.addChild(this.hoursNum);
+            // this.hoursNum.width = 100;
+            this.canvas1 = this.cc({
+                type: StageView_1.default,
+                width: 200,
+                height: 100,
+                ratio: 16 / 9,
+                fixedStageScale: false,
+            });
             this.ccid({
                 id: "screens",
                 type: "ScreensManager",
-                stage: this.stage,
+                stage: this.canvas1,
                 defaultTransition: "FadeBlackInOut",
             });
-            this.screens.add({
-                id: "intro",
-                type: "ScreenVideo",
-                rid: "INTRO",
-                bgMusicVolPC: 0,
-                stage: this.stage,
-                onfinished: function (evt) {
-                    _this.jx.dj.music.play({ id: "MUSIC" });
-                    _this.screens.go("screen00");
-                },
-            });
+            // this.screens.add({
+            // 	id: "intro",
+            // 	type: "ScreenVideo",
+            // 	rid: "INTRO",
+            // 	bgMusicVolPC: 0,
+            // 	stage: this.stage,
+            // 	onfinished: (evt) => {
+            // 		this.jx.dj.music.play({ id: "MUSIC" });
+            // 		this.screens.go("screen00");
+            // 	},
+            // });
             this.screens.add({
                 id: "screen00",
                 type: Screen00_1.default,
-                stage: this.stage,
+                stage: this.canvas1,
                 onfinished: function (evt) { },
             });
             this.comps.initChildren(onInitialised);
@@ -69,7 +98,9 @@ define(["require", "exports", "jx/core/presets/StageGameModule", "screens/Screen
          * START
          */
         MainCtrl.prototype.start = function () {
-            this.screens.go(this.firstScreen);
+            this.canvas1.canvasHolder.addClass("partition");
+            this.canvas1.canvasHolder.css({ position: "inherit" });
+            this.screens.go("screen00");
             // this.jx.dj.music.play({id:"MUSIC"});
         };
         MainCtrl.prototype._configure = function (_a) {
@@ -86,7 +117,7 @@ define(["require", "exports", "jx/core/presets/StageGameModule", "screens/Screen
             if (delayAfterClick)
                 this.jx.config.app.lockDelayAfterClick = 250;
             this.jx.config.flashOptimizer.quality = flashQuality;
-            this.stage.ratio = this.dataObject.ratio;
+            // this.stage.ratio = this.dataObject.ratio;
             if (commonFlaLib)
                 this.commonLib = this.jx.db.findOne({
                     id: "COMMON_LIB.SCREEN",
@@ -103,7 +134,7 @@ define(["require", "exports", "jx/core/presets/StageGameModule", "screens/Screen
             this.firstPhase = screenShortcut.length > 1 ? screenShortcut[1] : null;
         };
         return MainCtrl;
-    }(StageGameModule_1.default));
+    }(GameModule_1.default));
     exports.default = MainCtrl;
 });
 //# sourceMappingURL=index.js.map
